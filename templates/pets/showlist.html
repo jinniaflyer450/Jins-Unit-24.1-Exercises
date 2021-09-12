@@ -1,3 +1,24 @@
 {% extends 'templates\base.html' %}
 {% block title %}Sunshine Adoption Agency Home{% endblock %}
-{% block content %}{% endblock %}
+{% block content %}
+<h1>Welcome to Sunshine Adoption Agency's Website!</h1>
+<p>We are Sunshine Adoption Agency, located in San Jose, California. Below is a list of all our animals.</p>
+<h2>The Animals:</h2>
+{% if pets != [] %}
+<ul>
+    {% for pet in pets %}
+    <li>
+        <img src="{{pet.photo_url}}" alt="{{pet.name}} the {{pet.species}}.">
+        {{pet.name}}
+        {% if pet.availability == True %}
+        <span>Available for adoption!</span>
+        {% else %}
+        <span>Not currently available for adoption.</span>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>We currently have no animals on record. Please check back later, though!</p>
+{% endif %}
+{% endblock %}

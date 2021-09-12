@@ -24,6 +24,8 @@ db.create_all()
 @app.route('/')
 def show_home():
     """A view function that returns the homepage of the adoption website, which lists all pets in the database."""
+    pets = Pet.query.all()
+    return render_template('showlist.html', pets=pets)
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_pet():
