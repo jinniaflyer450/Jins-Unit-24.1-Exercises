@@ -14,5 +14,8 @@ def add_pets():
     fifi = Pet(name="Fifi", species="cat", availability=False, age=2)
     baxter = Pet(name="Baxter", species="turtle", availability=True, age=50)
 
+    db.session.add_all([fido, fifi, baxter])
+    db.session.commit()
+
 reset_database()
 add_pets()
