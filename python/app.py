@@ -1,3 +1,9 @@
+from flask import Flask, render_template, redirect, flash, url_for
+from flask-sqlalchemy import SQLAlchemy
+from flask-wtf import FlaskForm
+from models import Pet
+from forms import AddPetForm, EditPetForm
+
 @app.route('/')
 def show_home():
     """A view function that returns the homepage of the adoption website, which lists all pets in the database."""
