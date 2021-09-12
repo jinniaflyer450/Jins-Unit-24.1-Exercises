@@ -1,5 +1,7 @@
+"""Forms for the application for a fictional adoption agency."""
+
 from flask import Flask
-from flask-sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from models import Pet
 from flask-wtf import FlaskForm
 

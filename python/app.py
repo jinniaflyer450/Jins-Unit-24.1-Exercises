@@ -1,8 +1,22 @@
-from flask import Flask, render_template, redirect, flash, url_for
-from flask-sqlalchemy import SQLAlchemy
+"""An application for a fictional pet adoption agency. Users can add various pets to a database and edit
+existing pets as they are brought in or adopted."""
+
+from flask import Flask, request, render_template, redirect, flash, url_for
+from flask_sqlalchemy import SQLAlchemy
 from flask-wtf import FlaskForm
-from models import Pet
+from models import db, connect_db, Pet
 from forms import AddPetForm, EditPetForm
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'catdog'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Ob1wankenobi@localhost/adopt'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = True
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['WTF_CSRF_ENABLED'] = False
+
+connect_db(app)
+db.create_all()
 
 @app.route('/')
 def show_home():
