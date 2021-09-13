@@ -3,7 +3,7 @@ existing pets as they are brought in or adopted."""
 
 from flask import Flask, request, render_template, redirect, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask-wtf import FlaskForm
+from flask_wtf import FlaskForm
 from models import db, connect_db, Pet
 from forms import AddPetForm, EditPetForm
 from flask_debugtoolbar import DebugToolbarExtension

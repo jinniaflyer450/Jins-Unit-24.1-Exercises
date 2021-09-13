@@ -3,7 +3,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from models import Pet
-from flask-wtf import FlaskForm
+from flask_wtf import FlaskForm
 
 class AddPetForm(FlaskForm):
     """A form for adding a new pet to the adoption website's database."""
