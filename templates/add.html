@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
 {% block title %}Add a Pet{% endblock %}
-
-{% block content %}{% endblock %}
+{% block content %}
+<h1>Add a Pet</h1>
+<form method="POST" action="/add">
+    {% for field in form %}
+    <div>
+        {{field.label}}
+        {{field}}
+    </div>
+    {% endfor %}
+    <button>Add Pet</button>
+</form>
+{% endblock %}

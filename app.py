@@ -4,6 +4,7 @@ existing pets as they are brought in or adopted."""
 from flask import Flask, request, render_template, redirect, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
+from wtforms import StringField, BooleanField, FloatField
 from models import db, connect_db, Pet
 from forms import AddPetForm, EditPetForm
 from flask_debugtoolbar import DebugToolbarExtension
@@ -36,6 +37,22 @@ def show_home():
 def add_pet():
     """A view function that returns a form to add a new pet on a GET request and submits the form to the
     database on a POST request."""
+    form = AddPetForm()
+    if form.validate_on_submit():
+        new_pet = Pet(name=form.name.data, species=form.species.data, availability=form.availability.data, 
+        photo_url=form.picture.data, age=form.age.data, notes=form.notes.data)
+        if new_pet.photo_url == '':
+            new_pet.photo_url = None
+        if new_pet.age == '':
+            new_pet.age = None
+        if new_pet.notes == '':
+            new_pet.notes = None
+        db.session.add(new_pet)
+        db.session.commit()
+        flash(f"Added new pet named {new_pet.name}.")
+        return redirect('/')
+    else:
+        return render_template('add.html', form=form)
 
 @app.route('/<int:pet_id>', methods=['GET', 'POST'])
 def pet_details_and_edit(pet_id):

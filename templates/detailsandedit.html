@@ -2,4 +2,20 @@
 
 {% block title %}{{pet.name}} Details{% endblock %}
 
-{% block content %}{% endblock %}
+{% block content %}
+<h1>{{pet.name}} Details:</h1>
+<img src="{{pet.photo_url}}" alt="{{pet.name}} the {{pet.species}}">
+{% if pet.availability == True %}
+<em>Available!</em>
+{% else %}
+<em>Not available.</em>
+{% endif %}
+<p>Name: {{pet.name}}</p>
+<p>Species: {{pet.species}}</p>
+{% if pet.age != None %}
+<p>Age: {{pet.age}}</p>
+{% endif %}
+{% if pet.notes != None %}
+<p>Notes: {{pet.notes}}</p>
+{% endif %}
+{% endblock %}
