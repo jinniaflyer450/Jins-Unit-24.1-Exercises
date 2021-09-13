@@ -25,6 +25,11 @@ db.create_all()
 def show_home():
     """A view function that returns the homepage of the adoption website, which lists all pets in the database."""
     pets = Pet.query.all()
+    for pet in pets:
+        if pet.photo_url == None:
+            pet.photo_url = url_for('static', filename='no_image.png')
+            db.session.add(pet)
+    db.session.commit()
     return render_template('showlist.html', pets=pets)
 
 @app.route('/add', methods=['GET', 'POST'])

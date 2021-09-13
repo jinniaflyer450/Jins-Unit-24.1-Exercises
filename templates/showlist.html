@@ -8,13 +8,12 @@
 <ul>
     {% for pet in pets %}
     <li>
-        <img src="{{pet.photo_url}}" alt="{{pet.name}} the {{pet.species}}.">
-        {{pet.name}}
-        {% if pet.availability == True %}
-        <span>Available for adoption!</span>
+        {% if pet.availability == True%}
+        <h3>{{pet.name}}--Available</h3>
         {% else %}
-        <span>Not currently available for adoption.</span>
+        <h3>{{pet.name}}--Unavailable</h3>
         {% endif %}
+        <img src="{{pet.photo_url}}" alt="{{pet.name}} the {{pet.species}}.">
     </li>
     {% endfor %}
 </ul>
