@@ -4,7 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from models import Pet
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, FloatField, URLField, SelectField
+from wtforms import StringField, BooleanField, FloatField, SelectField
 from wtforms.validators import InputRequired, Optional, NumberRange, URL, AnyOf
 
 class AddPetForm(FlaskForm):
@@ -13,7 +13,7 @@ class AddPetForm(FlaskForm):
     species = SelectField("Species", choices=[("cat", "cat"), ("dog", "dog"), ("porcupine", "porcupine")], 
     validators=[AnyOf(["dog", "cat", "porcupine"])])
     availability = BooleanField("Available for adoption?")
-    picture = URLField("Photo", validators=[Optional(), URL()])
+    picture = StringField("Photo", validators=[Optional(), URL("Photo source must be a URL.")])
     age = FloatField("Age (between 0 and 30)", 
     validators=[Optional(), NumberRange(min=0, max=30, message="Age must be between 0 and 30 years old.")])
     notes = StringField("Notes", validators=[Optional()])
