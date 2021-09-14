@@ -6,16 +6,30 @@
 <h1>{{pet.name}} Details:</h1>
 <img src="{{pet.photo_url}}" alt="{{pet.name}} the {{pet.species}}">
 {% if pet.availability == True %}
-<em>Available!</em>
+<p><em>Available!</em></p>
 {% else %}
-<em>Not available.</em>
+<p><em>Not available.</em></p>
 {% endif %}
 <p>Name: {{pet.name}}</p>
 <p>Species: {{pet.species}}</p>
 {% if pet.age != None %}
 <p>Age: {{pet.age}}</p>
 {% endif %}
-{% if pet.notes != None %}
-<p>Notes: {{pet.notes}}</p>
-{% endif %}
+
+<h2>Edit {{pet.name}} Details:</h2>
+<form action="/{{pet.id}}" method="POST">
+    {% for field in form %}
+    <div>
+        {{field.label}}
+        {{field}}
+        {% if field.errors %}
+        {% for error in field.errors%}
+        {{error}}
+        {% endfor %}
+        {% endif %}
+    </div>
+    {% endfor %}
+    <button>Edit Pet</button>
+</form>
+<a href="/">Return To Pet List</a>
 {% endblock %}

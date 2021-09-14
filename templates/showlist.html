@@ -9,9 +9,9 @@
     {% for pet in pets %}
     <li>
         {% if pet.availability == True%}
-        <h3>{{pet.name}}--Available</h3>
+        <h3><a href="/{{pet.id}}">{{pet.name}}--Available</a></h3>
         {% else %}
-        <h3>{{pet.name}}--Unavailable</h3>
+        <h3><a href="/{{pet.id}}">{{pet.name}}--Unavailable</a></h3>
         {% endif %}
         <img src="{{pet.photo_url}}" alt="{{pet.name}} the {{pet.species}}.">
     </li>

@@ -58,3 +58,19 @@ def add_pet():
 def pet_details_and_edit(pet_id):
     """A view function that returns a page with details for the pet in the database with the id of pet_id and
     a form to edit this pet's details on a GET request. On a POST request, this view function submits the form."""
+    pet = Pet.query.get(pet_id)
+    pet_for_form = {"picture": pet.photo_url, "notes": pet.notes, "availability": pet.availability}
+    form = EditPetForm(obj=pet_for_form)
+    if form.validate_on_submit():
+        pet.availability = form.availability.data
+        if form.picture.data == '':
+            pet.photo_url = url_for('static', filename="no_image.png")
+        else:
+            pet.photo_url = form.picture.data
+        pet.notes = form.notes.data
+        db.session.add(pet)
+        db.session.commit()
+        flash(f"Edited pet named {pet.name}.")
+        return redirect(f'/{pet.id}')
+    else:
+        return render_template('detailsandedit.html', pet=pet, form=form)

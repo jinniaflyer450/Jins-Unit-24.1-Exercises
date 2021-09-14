@@ -8,8 +8,14 @@
     <div>
         {{field.label}}
         {{field}}
+        {% if field.errors %}
+        {% for error in field.errors%}
+        {{error}}
+        {% endfor %}
+        {% endif %}
     </div>
     {% endfor %}
     <button>Add Pet</button>
 </form>
+<a href="/">Return to Pet List</a>
 {% endblock %}

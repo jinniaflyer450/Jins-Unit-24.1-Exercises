@@ -13,10 +13,14 @@ class AddPetForm(FlaskForm):
     species = SelectField("Species", choices=[("cat", "cat"), ("dog", "dog"), ("porcupine", "porcupine")], 
     validators=[AnyOf(["dog", "cat", "porcupine"])])
     availability = BooleanField("Available for adoption?")
-    picture = StringField("Photo", validators=[Optional(), URL("Photo source must be a URL.")])
+    picture = StringField("Photo", validators=[Optional(), URL(message="Photo source must be a URL.")])
     age = FloatField("Age (between 0 and 30)", 
     validators=[Optional(), NumberRange(min=0, max=30, message="Age must be between 0 and 30 years old.")])
     notes = StringField("Notes", validators=[Optional()])
 
 class EditPetForm(FlaskForm):
     """A form for editing a pet that is already in the adoption website's database."""
+    picture = StringField("Photo", validators=[Optional(), URL(message="Photo source must be a URL.")])
+    availability = BooleanField("Available for adoption?")
+    notes = StringField("Notes", validators=[Optional()])
+
